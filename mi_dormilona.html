@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Mi dormilona - Michel y Alexandra</title>
+
+    <!-- Fuente bonita -->
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            background-color: #ffe6f2;
+            font-family: 'Dancing Script', cursive;
+            text-align: center;
+            padding: 30px;
+        }
+
+        h1 {
+            color: #ff66b2;
+            font-size: 50px;
+        }
+
+        p {
+            font-size: 28px;
+            color: #ff3399;
+            margin: 20px;
+            opacity: 0;
+        }
+
+        .kitty {
+            width: 120px;
+            height: 120px;
+            background-image: url('https://upload.wikimedia.org/wikipedia/commons/9/99/Hello_Kitty_Logo.svg');
+            background-size: cover;
+            margin: 20px auto;
+            opacity: 0;
+        }
+
+        .heart {
+            color: #ff3399;
+            font-size: 36px;
+            animation: heartbeat 1.5s infinite;
+            margin: 0 10px;
+        }
+
+        .button {
+            background-color: #ff66b2;
+            border: none;
+            color: white;
+            padding: 18px 30px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 24px;
+            margin: 20px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s;
+            display: none;
+        }
+
+        .button:hover {
+            background-color: #ff3385;
+        }
+
+        #countdown {
+            font-size: 36px;
+            font-weight: bold;
+            color: #ff0066;
+            display: none;
+        }
+
+        .message {
+            font-size: 28px;
+            color: #ff3399;
+            margin-top: 30px;
+        }
+
+        #heartAnimation {
+            display: none;
+            font-size: 200px;
+            color: red;
+            animation: pulseHeart 2s infinite;
+            margin-top: 20px;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes pulseHeart {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Música de fondo -->
+    <audio autoplay loop>
+        <source src="https://www.ejemplo.com/cancion.mp3" type="audio/mp3">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <h1>Para Mi Amor, Michel y Alexandra</h1>
+
+    <div id="kitty1" class="kitty"></div>
+    <p id="phrase1">Eres el sueño que siempre quise alcanzar, la melodía que jamás quiero dejar de escuchar.</p>
+    <button class="button" id="btn1" onclick="startCountdown(2)">Presioname</button>
+
+    <div id="kitty2" class="kitty"></div>
+    <p id="phrase2">Cada momento a tu lado es un regalo, y mi vida tiene sentido solo porque estás en ella.</p>
+    <button class="button" id="btn2" onclick="startCountdown(3)">Presioname</button>
+
+    <div id="kitty3" class="kitty"></div>
+    <p id="phrase3">Mi corazón late solo por ti, y siempre estaré a tu lado, en cada paso que des.</p>
+    <button class="button" id="btn3" onclick="showHeartAnimation()">Presioname</button>
+
+    <div id="countdown"></div>
+
+    <div id="finalMessage" style="display: none;">
+        <h2>Michel y Alexandra, por siempre</h2>
+        <p class="message">Te siento cerca siempre, porque nunca sales de mi corazón. Te amo <3</p>
+    </div>
+
+    <div id="heartAnimation" style="display:none;">
+        ❤️
+    </div>
+
+    <script>
+        let currentPhrase = 1;
+        let totalPhrases = 3;
+
+        function showPhrase(phraseNumber) {
+            let phraseElement = document.getElementById(`phrase${phraseNumber}`);
+            let buttonElement = document.getElementById(`btn${phraseNumber}`);
+            let kittyElement = document.getElementById(`kitty${phraseNumber}`);
+
+            phraseElement.style.opacity = 1;
+            buttonElement.style.display = 'inline-block';
+            kittyElement.style.opacity = 1;
+        }
+
+        function startCountdown(nextPhrase) {
+            let countdownElement = document.getElementById('countdown');
+            countdownElement.style.display = 'block';
+            countdownElement.innerHTML = "3";
+
+            setTimeout(function() {
+                countdownElement.innerHTML = "2";
+            }, 1000);
+
+            setTimeout(function() {
+                countdownElement.innerHTML = "1";
+            }, 2000);
+
+            setTimeout(function() {
+                countdownElement.style.display = 'none';
+                if (nextPhrase <= totalPhrases) {
+                    showPhrase(nextPhrase);
+                } else {
+                    showHeartAnimation();
+                }
+            }, 3000);
+        }
+
+        function showHeartAnimation() {
+            let heartElement = document.getElementById('heartAnimation');
+            heartElement.style.display = 'block';
+            setTimeout(function() {
+                heartElement.style.animation = 'pulseHeart 2s infinite';
+            }, 500);
+
+            setTimeout(function() {
+                heartElement.innerHTML = "❤️";
+                let finalMessageElement = document.getElementById('finalMessage');
+                finalMessageElement.style.display = 'block';
+            }, 2000);
+        }
+
+        // Inicia el proceso con la primera frase
+        showPhrase(1);
+    </script>
+
+</body>
+</html>
